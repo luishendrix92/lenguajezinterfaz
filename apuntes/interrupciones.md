@@ -15,19 +15,3 @@ Existen dos clases de interrupciones por Hardware
 ## Instrucción MOV
 
 `mov` es una instrucción del lenguaje ensamblador que se utiliza para mover datos entre registros.
-
-## Esqueleto del programa
-
-```asm
-; programa que muestra un caracter
-; Gustavo Ramirez
-; 10211430
-; 11 de Septiembre del 2018
-
-.Model small
-.stack 64
-.Data
-.Code
-.Exit
-end
-```

@@ -1,4 +1,4 @@
-; 2 - Programa que imprime "Hola Mundo"
+; 2 - Programa que imprime nombre y Num.Ctrl
 ; López Garay Luis Felipe
 ; 15211312
 ; 13 de Septiembre del 2018
@@ -8,7 +8,7 @@
 .stack 64
 
 .Data
-  msg db "Hola Mundo de LDI", 0Ah, 0Dh, "$"
+  msg db "15211312 - Lopez Garay Luis Felipe", 0Ah, 0Dh, "$"
 
 .Code
   mov ax,seg msg ; Mover el mensaje al registro de datos
@@ -23,3 +23,4 @@
 .Exit
 
 end
+

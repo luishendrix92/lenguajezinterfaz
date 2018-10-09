@@ -13,7 +13,7 @@ Las instruciones de salto en el lenguaje ensamblador se utilizan para transferir
 - Si el número es igual a 50, despliega un mensaje "medio".
 - Si el número es mayor o igual a 51, despliega un mensaje "mayor".
 
-15- Realizar un programa que ejecute un buce (con LOP) que itera 10 veces pero la quitan iteración (CMP) sale del ciclo (JE) y desplegar un mensaje de salida.
+15- Realizar un programa que ejecute un buce (con LOOP) que itera 10 veces pero la quinta iteración (CMP) sale del ciclo (JE) y desplegar un mensaje de salida.
 
 16- Realizar un programa que simule un ciclo FOR (con JMP), e imprima los números.
 

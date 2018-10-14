@@ -3,15 +3,15 @@
 ; 15211312
 ; DAY de MONTH del 2018
 
-.Model small
+.model small
 
-.Stack 64
+.stack 64
 
-.Data
+.data
 
-.Code
+.code
 MAIN PROC
-  .Exit
+  .exit
 ENDP
 
-End MAIN
+end MAIN

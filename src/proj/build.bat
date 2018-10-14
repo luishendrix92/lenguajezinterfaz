@@ -1,4 +1,4 @@
-DEL main.exe
-TASM main.asm
-TLINK main.obj
-main
+DEL out\main.exe
+TASM main.asm out\
+TLINK out\main.obj out\main
+out\main

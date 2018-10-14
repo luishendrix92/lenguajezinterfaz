@@ -8,7 +8,7 @@
 .Stack 64
 
 .Data
-	frase db "Mas vale pajaro en mano que un ciento volando", 10, 13, "$"
+	frase db "Casi repruebo la unidad uno :)", 10, 13, "$"
 
 .Code
 	mov ax,@Data
@@ -19,7 +19,8 @@
 		lea dx,frase
 		mov ah,09h
 		int 21h
-	loop ciclofrase
+		
+		loop ciclofrase
 
 .Exit
 

@@ -1,39 +1,25 @@
-; 1 - Programa que muestra info m¡a usando variables
-; L¢pez Garay Luis Felipe
+; 1 - Programa que muestra hola mundo con variable
+; LÃ³pez Garay Luis Felipe
 ; 15211312
-; 27 de Septiembre del 2018
-; DOS Encoding - [¢ (162/0xAC)]
+; 14 de Octubre del 2018
 
-.Model small
+.model small
 
 .stack 64
 
-.Data
-  nombre    db "L¢pez Garay Luis Felipe", 10, 13, "$"
-  nocontrol db "15211312", 10, 13, "$"
-  carrera   db "Sistemas Computacionales", 10, 13, "$"
-  edad      db "26", 10, 13, "$"
+.data
+  hola db "Hola Mundo!",10,13,'$'
 
-.Code
-  mov ax,@Data
+.code
+MAIN PROC
+  mov ax,@data
   mov ds,ax
 
-  lea dx,nombre
   mov ah,09h
+  lea dx,hola
   int 21h
 
-  lea dx,nocontrol
-  mov ah,09h
-  int 21h
+  .exit
+ENDP
 
-  lea dx,carrera
-  mov ah,09h
-  int 21h
-
-  lea dx,edad
-  mov ah,09h
-  int 21h
-
-.Exit
-
-end
+end MAIN

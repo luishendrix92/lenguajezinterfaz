@@ -2,7 +2,7 @@
 ; L¢pez Garay Luis Felipe
 ; 15211312
 ; 102 de Octubre del 2018
-; DOS Encoded
+; DOS Encoded [¢]
 
 .Model small
 
@@ -10,17 +10,19 @@
 
 .Data
 	nombre db "L¢pez Garay Luis Felipe", 10, 13, "$"
+	edad   dw 20 ; En realidad tengo 26 pero no caben en consola
 
 .Code
 	mov ax,@Data
 	mov ds,ax
 
-	mov cx,20 ; En readlidad tengo 26
+	mov cx,edad
 	ciclonombre:
 		lea dx,nombre
 		mov ah,09h
 		int 21h
-	loop ciclonombre
+		
+		loop ciclonombre
 
 .Exit
 

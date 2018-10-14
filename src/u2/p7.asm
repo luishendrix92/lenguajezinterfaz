@@ -8,7 +8,7 @@
 .Stack 64
 
 .Data
-  frase db "Ensamblado con ensamblador", 10, 13, "$"
+  frase db "Ensamblado con ensamblador!", 10, 13, "$"
 
 .Code
   mov ax,@Data

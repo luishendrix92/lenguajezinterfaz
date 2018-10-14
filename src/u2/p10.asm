@@ -2,7 +2,7 @@
 ; L¢pez Garay Luis Felipe
 ; 15211312
 ; 02 de Octubre del 2018
-; DOS Encoded
+; DOS Encoded [¢]
 
 .Model small
 
@@ -10,7 +10,7 @@
 
 .Data
 	nombre db "L¢pez Garay Luis Felipe", 10, 13, "$"
-	frase db "Hola mundo cruel!", 10, 13, "$"
+	frase db "Como agua para chocolate", 10, 13, "$"
 	nocontrol db "15211312", 10, 13, "$"
 
 .Code

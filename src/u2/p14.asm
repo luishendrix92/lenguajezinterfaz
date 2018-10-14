@@ -2,16 +2,16 @@
 ; L¢pez Garay Luis Felipe
 ; 15211312
 ; 9 de Octubre del 2018
-; DOS Encoded [£]
+; DOS Encoded [¢£]
 
 .Model small
 
 .Stack 64
 
 .Data
-  menor_ans db "El n£mero es menor que 50",10,13,'$'
-  medio_ans db "El n£mero es igual a 50",10,13,'$'
-  mayor_ans db "El n£mero es mayor que 50",10,13,'$'
+  menor_ans db "El n£mero [55] es menor que 50",10,13,'$'
+  medio_ans db "El n£mero [33] es igual que 50",10,13,'$'
+  mayor_ans db "El n£mero [50] es mayor que 50",10,13,'$'
   numero1 dw 55
   numero2 dw 33
   numero3 dw 50

@@ -7,7 +7,7 @@
 .Data
   newline db 10,13,'$'
   num_a   dw 3
-  num_b   dw 2
+  num_b   dw 3
 
 .Code
   mov ax,@Data

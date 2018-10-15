@@ -3,7 +3,7 @@
 ; recreated  in  DOS 8086  language. ;
 ; ---------------------------------- ;
 ; Instituto  Tecnológico  de Tijuana ;
-; LDI   |    SC-SERIE    |    2018-2 ;
+; LDI   |  SCC-1014 SC7C  |   2018-2 ;
 ; López Garay Luis Felipe - 15211312 ;
 ; Tijuana, México @ December of 2018 ;
 ; __________________________________ ;

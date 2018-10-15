@@ -1,4 +1,4 @@
-; 16 - Programa que muestra el abecedario MAYUS simulando un ciclo FOR
+; 16 - Programa que muestra números del 10 al 1 con FOR
 ; López Garay Luis Felipe
 ; 15211312
 ; 9 de Octubre del 2018
@@ -8,24 +8,27 @@
 .Stack 64
 
 .Data
-  from dw 'A'
-  to   dw 'Z'
 
 .Code
 MAIN PROC
   mov ax,@Data
   mov ds,ax
 
-  mov cx,from ; for (int i=65;
+  mov cx,10 ; for (int i=10;
   FOR_LOOP:
-    mov dx,cx
     mov ah,02h
+    mov dx,cx
+    add dx,'0'
     int 21h
 
-    ; i <= 90; i++)
-    inc cx
-    cmp cx,to
-    jle FOR_LOOP
+    ; i > 0; i--)
+    dec cx
+    jz END_FOR_LOOP
+    ; En la diapositiva espefica claramente
+    ; que usáramos jmp, cosa que no es lo más
+    ; óptimo en este caso... *shrug*
+    jmp FOR_LOOP
+  END_FOR_LOOP:
 
   .Exit
 ENDP

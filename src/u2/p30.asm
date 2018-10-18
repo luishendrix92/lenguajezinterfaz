@@ -28,12 +28,18 @@
   escr_na_prmp db 10,13,"¨Sobre qu‚ archivo quieres escribir? (Debe existir): $"
   escr_ca_prmp db 10,13,"Escribe el contenido (M ximo 80 caracteres):",10,13,'$'
   escribir_a_o db 10,13,"­Se ha escrito exitosamente en el archivo!$"
-  escr_abr_a_e db 10,13,"Error al abrir el archivo! Quiz  est  abierto o no existe...$"
   escribir_a_e db 10,13,"Ocurri¢ error al intentar escribir en el archivo...$"
 
   leer_na_prmp db 10,13,"Nombre del archivo a leer: $"
   leer_arch_o1 db "Aqu¡ est  el contenido del archivo:",10,13,'$'
-  leer_arch_o2 db "-----------------------------------$"
+  leer_arch_o2 db "----------------------------------------",10,13,'$'
+  leer_arch_er db 10,13,"No se ha podido leer el archivo :($"
+
+  borr_na_prmp db 10,13,"¨Qu‚ archivo quieres borrar?: $"
+  borr_arch_ok db 10,13,"­Se ha eliminado el archivo exitosamente!$"
+  borr_arch_er db 10,13,"No se pudo borrar el archivo. Puede que no exista o est‚ abierto...$"
+
+  abrir_arch_e db 10,13,"Error al abrir el archivo! Quiz  est  abierto o no existe...$"
 
   archivo_nom db 13 dup(' ')
   escr_buffer db 80 dup(?)
@@ -75,6 +81,10 @@ MAIN PROC
       je CREAR_ARCHIVO
       cmp al,'2'
       je ESCRIBIR_ARCHIVO
+      cmp al,'3'
+      je LEER_ARCHIVO
+      cmp al,'4'
+      je BORRAR_ARCHIVO
       cmp al,'5'
       je FIN_MENU_LOOP
     SWITCH_DEFAULT:
@@ -196,11 +206,11 @@ MAIN PROC
     mov ah,01h
     int 21h
 
-    jmp CERRAR_ARCHIVO
+    jmp CERRAR_ARCHIVO_E
 
     ERROR_ABRIR_ARCHIVO_E:
     mov ah,09h
-    lea dx,escr_abr_a_e
+    lea dx,abrir_arch_e
     int 21h
     mov ah,01h
     int 21h
@@ -214,7 +224,7 @@ MAIN PROC
     mov ah,01h
     int 21h
 
-    CERRAR_ARCHIVO:
+    CERRAR_ARCHIVO_E:
     mov ah,3eh
     int 21h
 
@@ -222,34 +232,128 @@ MAIN PROC
 
     LEER_ARCHIVO:
     mov ah,09h
-    lea dx,escr_na_prmp
+    lea dx,leer_na_prmp
     int 21h
+
+    mov cx,240
+    mov bx,offset lect_buffer
+    LIMPIAR_BUFFER:
+      mov dl,' '
+      mov [bx],dl
+      inc bx
+      loop LIMPIAR_BUFFER
 
     mov cx,12 ; El nombre es 8 bits m ximo + ".EXT" (4 bits)
     push si
-    PEDIR_NOMBRE_ARCHIVO_E:
+    PEDIR_NOMBRE_ARCHIVO_L:
       mov ah,01h
       int 21h
       
       cmp al,0dh ; ENTER
-      je FIN_PEDIR_NOMBRE_ARCHIVO_E
+      je FIN_PEDIR_NOMBRE_ARCHIVO_L
 
       mov archivo_nom[si],al
       inc si
 
-      loop PEDIR_NOMBRE_ARCHIVO_E
-    FIN_PEDIR_NOMBRE_ARCHIVO_E:
+      loop PEDIR_NOMBRE_ARCHIVO_L
+    FIN_PEDIR_NOMBRE_ARCHIVO_L:
     mov archivo_nom[si+1],0 ; Null-Terminator
     pop si
 
-    ABRIR_ARCHIVO_E:
+    ABRIR_ARCHIVO_L:
     mov ah,3dh ; Servicio de apertura
-    mov al,02h ; Modo Read/Write
+    mov al,00h ; Modo ReadOnly
     lea dx,archivo_nom
     int 21h ; Guarda handler en AX
 
-    jc ERROR_ABRIR_ARCHIVO_E
+    jc ERROR_ABRIR_ARCHIVO_L
     mov bx,ax ; Mover el handler a bx para cerrar/escribir
+
+    mov ah,3fh ; Servicio de lectura
+    mov cx,240 ; Bytes a leer
+    lea dx,lect_buffer
+    int 21h
+
+    jc ERROR_LEER_ARCHIVO
+
+    mov ah,09h
+    lea dx,leer_arch_o1
+    int 21h
+    lea dx,leer_arch_o2
+    int 21h
+    lea dx,lect_buffer
+    int 21h
+    mov ah,01h
+    int 21h
+
+    jmp CERRAR_ARCHIVO_L
+
+    ERROR_ABRIR_ARCHIVO_L:
+    mov ah,09h
+    lea dx,abrir_arch_e
+    int 21h
+    mov ah,01h
+    int 21h
+
+    jmp MENU_LOOP
+
+    ERROR_LEER_ARCHIVO:
+    mov ah,09h
+    lea dx,leer_arch_er
+    int 21h
+    mov ah,01h
+    int 21h
+
+    CERRAR_ARCHIVO_L:
+    mov ah,3eh
+    int 21h
+
+    jmp MENU_LOOP
+
+    BORRAR_ARCHIVO:
+    mov ah,09h
+    lea dx,borr_na_prmp
+    int 21h
+
+    mov cx,12 ; El nombre es 8 bits m ximo + ".EXT" (4 bits)
+    push si
+    PEDIR_NOMBRE_ARCHIVO_B:
+      mov ah,01h
+      int 21h
+      
+      cmp al,0dh ; ENTER
+      je FIN_PEDIR_NOMBRE_ARCHIVO_B
+
+      mov archivo_nom[si],al
+      inc si
+
+      loop PEDIR_NOMBRE_ARCHIVO_B
+    FIN_PEDIR_NOMBRE_ARCHIVO_B:
+    mov archivo_nom[si+1],0 ; Null-Terminator
+    pop si
+
+    mov ah,41h ; Servicio de borrado
+    lea dx,archivo_nom
+    int 21h
+
+    jc ERROR_BORRAR_ARCHIVO
+
+    mov ah,09h
+    lea dx,borr_arch_ok
+    int 21h
+    mov ah,01h
+    int 21h
+
+    jmp MENU_LOOP
+
+    ERROR_BORRAR_ARCHIVO:
+    mov ah,09h
+    lea dx,borr_arch_er
+    int 21h
+    mov ah,01h
+    int 21h
+
+    jmp MENU_LOOP
   FIN_MENU_LOOP:
   .exit
 ENDP

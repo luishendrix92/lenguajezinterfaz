@@ -75,7 +75,7 @@ PRINT_CHAR_COLOR MACRO character,color,veces
 ENDM
 
 IMPORT_CLR_SCR MACRO
-  ; [P] CLR_SCR -> EFF ()
+  ; [P] CLR_SCR :: EFF ()
   ; """"""""""""""""""""""""""""""""""""""""""
   ; Clears the contents of the console screen.
   CLR_SCR PROC

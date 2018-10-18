@@ -2,7 +2,7 @@
 ; Lopez Garay Luis Felipe
 ; 15211312
 ; 14 de Octubre del 2018
-; DOS Encoding [¤]
+; DOS Encoding [¤¡]
 
 .model small
 
@@ -32,7 +32,7 @@ MAIN PROC
   add al,antig
   aam
 
-  add ax,3030h
+  add ax,3030h ; Convierte ambos nibbles a caracteres ASCII
   push ax
 
   mov dl,ah

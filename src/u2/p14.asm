@@ -9,9 +9,15 @@
 .Stack 64
 
 .Data
-  menor_ans db "El n£mero [55] es menor que 50",10,13,'$'
-  medio_ans db "El n£mero [33] es igual que 50",10,13,'$'
-  mayor_ans db "El n£mero [50] es mayor que 50",10,13,'$'
+  menor_ans1 db "El n£mero [55] es menor que 50",10,13,'$'
+  medio_ans1 db "El n£mero [55] es igual que 50",10,13,'$'
+  mayor_ans1 db "El n£mero [55] es mayor que 50",10,13,'$'
+  menor_ans2 db "El n£mero [33] es menor que 50",10,13,'$'
+  medio_ans2 db "El n£mero [33] es igual que 50",10,13,'$'
+  mayor_ans2 db "El n£mero [33] es mayor que 50",10,13,'$'
+  menor_ans3 db "El n£mero [50] es menor que 50",10,13,'$'
+  medio_ans3 db "El n£mero [50] es igual que 50",10,13,'$'
+  mayor_ans3 db "El n£mero [50] es mayor que 50",10,13,'$'
   numero1 dw 55
   numero2 dw 33
   numero3 dw 50
@@ -31,17 +37,17 @@ MAIN PROC
   jmp MEDIO1
 
   MENOR1:
-    lea dx,menor_ans
+    lea dx,menor_ans1
     int 21h
     jmp CONTINUE_N2
   
   MAYOR1:
-    lea dx,mayor_ans
+    lea dx,mayor_ans1
     int 21h
     jmp CONTINUE_N2
   
   MEDIO1:
-    lea dx,medio_ans
+    lea dx,medio_ans1
     int 21h
 
   CONTINUE_N2:
@@ -54,17 +60,17 @@ MAIN PROC
   jmp MEDIO2
 
   MENOR2:
-    lea dx,menor_ans
+    lea dx,menor_ans2
     int 21h
     jmp CONTINUE_N3
   
   MAYOR2:
-    lea dx,mayor_ans
+    lea dx,mayor_ans2
     int 21h
     jmp CONTINUE_N3
   
   MEDIO2:
-    lea dx,medio_ans
+    lea dx,medio_ans2
     int 21h
   
   CONTINUE_N3:
@@ -77,17 +83,17 @@ MAIN PROC
   jmp MEDIO3
 
   MENOR3:
-    lea dx,menor_ans
+    lea dx,menor_ans3
     int 21h
     jmp FIN
   
   MAYOR3:
-    lea dx,mayor_ans
+    lea dx,mayor_ans3
     int 21h
     jmp FIN
   
   MEDIO3:
-    lea dx,medio_ans
+    lea dx,medio_ans3
     int 21h
   
   FIN:

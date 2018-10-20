@@ -24,12 +24,11 @@ MAIN PROC
     ; i > 0; i--)
     dec cx
     jz END_FOR_LOOP
-    ; En la diapositiva espefica claramente
-    ; que usáramos jmp, cosa que no es lo más
-    ; óptimo en este caso... *shrug*
+    ; Otra opción es utilizar 'cmp cx,0' al decrementar
+    ; y luego utilizar el salto 'jg FOR_LOOP'. Incluso
+    ; 'jnz' para jump not zero.
     jmp FOR_LOOP
   END_FOR_LOOP:
-
   .Exit
 ENDP
 

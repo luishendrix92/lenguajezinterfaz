@@ -1,8 +1,8 @@
-; 24 - Imprimir la suma de 2 n£meros usando 2 d°gitos
+; 25 - Imprimir la suma de mi edad y antigÅedad en el TEC
 ; Lopez Garay Luis Felipe
 ; 15211312
 ; 14 de Octubre del 2018
-; DOS Encoding [§°]
+; DOS Encoding [§]
 
 .model small
 
@@ -12,7 +12,7 @@
   edad  db 26
   antig db 4
   edad_msg  db "Tengo 26 a§os$"
-  antig_msg db 10,13,"Llevo 4 a§os en el tec$"
+  antig_msg db 10,13,"Llevo 4 §os en el tec$"
   respuesta db 10,13,"La suma de ambos es: $"
 
 .code

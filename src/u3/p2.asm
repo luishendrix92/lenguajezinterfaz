@@ -44,26 +44,52 @@ ENDM
 .stack 64
 
 .data
-  titulo_1 db "Menú de opciones v1",10,13,'$'
-  titulo_2 db "-------------------",10,13,'$'
+  titulo_h db "Menu de opciones v1",10,13,'$'
+  titulo_d db "------------------------------",10,13,'$'
+
+  opc_1 db "1- Circulo",10,13,'$'
+  opc_2 db "2- Cuadrado",10,13,'$'
+  opc_3 db "3- Rombo",10,13,'$'
+  opc_4 db "4- Rectangulo",10,13,'$'
+  opc_5 db "5- Suma de 2 numeros",10,13,'$'
+  opc_6 db "6- Resta de 2 numeros",10,13,'$'
+  opc_7 db "7- Multiplicacion de 2 numeros",10,13,'$'
+  opc_8 db "8- Division de 2 numeros",10,13,'$'
+  opc_9 db "9- Salir del programa",10,13,10,13,'$'
+  opc_p db "Elige una opcion: $"
+  opc_e db 10,13,"Opcion incorrecta! Elige de nuevo.$"
 
 .code
   INICIALIZAR
   
   MENU_OPCIONES:
-    mov ah,01h
-    int 21h
+    LIMPIAR_PANTALLA
+    IMPRIMIR_CADENA titulo_h
+    IMPRIMIR_CADENA titulo_d
+    IMPRIMIR_CADENA opc_1
+    IMPRIMIR_CADENA opc_2
+    IMPRIMIR_CADENA opc_3
+    IMPRIMIR_CADENA opc_4
+    IMPRIMIR_CADENA opc_5
+    IMPRIMIR_CADENA opc_6
+    IMPRIMIR_CADENA opc_7
+    IMPRIMIR_CADENA opc_8
+    IMPRIMIR_CADENA opc_9
+    IMPRIMIR_CADENA opc_p
+    PEDIR_CHAR
 
     cmp al,'1'
-    je OPCION_UNO
+    je CIRCULO
+    cmp al,'9'
+    je FIN_MENU_OPCIONES
   MENU_OPCION_DEFAULT:
-  ;
-  jmp FIN_MENU_OPCIONES
+    IMPRIMIR_CADENA opc_e
+    PEDIR_CHAR
+    jmp MENU_OPCIONES
 
-  OPCION_UNO:
-  ;
+  CIRCULO:
+    ;
 
   FIN_MENU_OPCIONES:
-  .exit
-
+    .exit
 end

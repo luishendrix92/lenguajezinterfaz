@@ -1,1 +1,9 @@
-out\p3.obj : unable to open file
+
+ Start  Stop   Length Name               Class
+
+ 00000H 000AAH 000ABH _TEXT              CODE
+ 000ACH 000C7H 0001CH _DATA              DATA
+ 000D0H 0014FH 00080H STACK              STACK
+
+Program entry point at 0000:0037
+

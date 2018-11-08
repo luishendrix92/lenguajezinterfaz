@@ -32,7 +32,6 @@ IMPRIMIR_CARRERA MACRO
   int 21h
 ENDM
 
-
 IMPRIMIR_HOBBY MACRO  
   mov ah,09h
   lea dx,hobby

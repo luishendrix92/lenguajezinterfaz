@@ -1,24 +1,25 @@
-********************************************************************************
-*  C a l c u l a d o r a . a s m                                               *
-********************************************************************************
-*                                                                              *
-*  .-----------------.                                                         *
-*  |     05 + 12     ||   Instrucciones:                                       *
-*  |_________________||   ==============                                       *
-*  | 1 | 2 | 3 | (+) ||   - Teclea dos dígitos para el primer número.          *
-*  |___|___|___|_____||   - Teclea el símbolo de suma o resta.                 *
-*  | 4 | 5 | 6 | (-) ||   - Teclea dos dígitos para el segundo número.         *
-*  |___|___|___|_____||                                                        *
-*  | 7 | 8 | 9 | BSp ||   - ESC: Salir de la calculadora                       *
-*  |___|___|___|_____||   - Backspace: Borrar el último dígito o símbolo.      *
-*  |   | 0 |   | Esc ||   - El resultado se muestra una vez introducido        *
-*  '___'___'___'_____'|     los dos numeros y el símbolo de operación.         *
-*   ''''''''''''''''''                                                         *
-*                                                                              *
-*  Notas:                                                                      *
-*  ======                                                                      *
-*  Si los 5 caracteres ingresados no cumplen con el formato {dd}[+-]{dd},      *
-*  entonces se mostrará ¡ERROR! en vez de un resultado numerico.               *
-*                                                                              *
-*  El resultado se muestra en no más de 3 dígitos por limitaciones.            *
-********************************************************************************
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  C a l c u l a d o r a . a s m                                               ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  .-----------------.                                                         ║
+║  |                 ||   Instrucciones:                                       ║
+║  |_________________||   ==============                                       ║
+║  | 1 | 2 | 3 | (+) ||   - Teclea dos dígitos para el primer número.          ║
+║  |___|___|___|_____||   - Teclea el símbolo de suma o resta.                 ║
+║  | 4 | 5 | 6 | (-) ||   - Teclea dos dígitos para el segundo número.         ║
+║  |___|___|___|_____||                                                        ║
+║  | 7 | 8 | 9 | BSp ||   - ESC: Salir de la calculadora                       ║
+║  |___|___|___|_____||   - Backspace: Borrar el último dígito o símbolo.      ║
+║  |   | 0 |   | Esc ||   - El resultado se muestra una vez introducido        ║
+║  |___|___|___|_____||     los dos numeros y el símbolo de operación.         ║
+║   ''''''''''''''''''                                                         ║
+║                                                                              ║
+║  Notas:                                                                      ║
+║  ======                                                                      ║
+║  El programa no te dejará ingresar otra cosa que no sean números y (+/-)     ║
+║  durante la realización de las operaciones en la calculadora.                ║
+║                                                                              ║
+║  El resultado se muestra en no más de 3 dígitos por limitaciones.            ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝

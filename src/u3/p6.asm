@@ -1,7 +1,7 @@
-; 5 - Calculadora con macros y procedimientos
+; 6 - Men£ con calculador y divisi¢n aparte de 2 d¡gitos
 ; L¢pez Garay Luis Felipe
 ; 15211312
-; 8 de Noviembre del 2018
+; 9 de Noviembre del 2018
 ; DOSEncoded [ ‚¡¢£­ÉÍ»Èº¼]
 
 INICIALIZAR MACRO
@@ -71,6 +71,27 @@ PEDIR_CHAR MACRO
   pop dx
 ENDM
 
+ESTABLECER_OPERANDOS MACRO
+  mov al,n2_decenas
+  mul diez
+  add al,n2_unidades
+  push ax
+  
+  mov al,n1_decenas
+  mul diez
+  add al,n1_unidades
+  pop dx
+  mov al,n2_decenas
+  mul diez
+  add al,n2_unidades
+  push ax
+  
+  mov al,n1_decenas
+  mul diez
+  add al,n1_unidades
+  pop dx
+ENDM
+
 PEDIR_DIGITO MACRO fila,columna,paso_anterior,paso_actual,variable
   GOTOXY fila,columna
   mov al,' '
@@ -79,7 +100,7 @@ PEDIR_DIGITO MACRO fila,columna,paso_anterior,paso_actual,variable
   call CAPTURAR_TECLA
       
   cmp ah,tecla_esc
-  je SALIR
+  je SALIR_CALC
   cmp ah,tecla_bsp
   je paso_anterior
   cmp al,'0'
@@ -112,6 +133,18 @@ ENDM
   operador    db ?
   resultado   db "(+) 000$"
   res_numer   db 0
+  diez        db 10
+
+  menu_l1 db "Men£ Versi¢n 2",10,13,'$'
+  menu_l2 db "--------------",10,13,'$'
+  menu_l3 db "1 - Calculadora con interfaz",10,13,'$'
+  menu_l4 db "2 - Divisi¢n de dos n£meros",10,13,'$'
+  menu_l5 db "3 - Salir del men£",10,13,10,13,'$'
+  menu_l6 db "Escoge una opci¢n: $"
+  opcion_incorrecta db 10,13,"No existe esa opci¢n, intenta de nuevo$"
+  n1_prompt db "Escribe el primer n£mero: $"
+  n2_prompt db 10,13,"Escribe el segundo n£mero: $"
+  division  db 10,13,10,13,"El resultado de la divisi¢n es: $"
 
 .code
 ; CAPTURAR_TECLA :: (Int8, Char) [(ah, al)]
@@ -147,19 +180,8 @@ ENDP
 ; REALIZAR_OPERACION :: Char[5] {variables} -> Int8 [al] :: Using DX
 REALIZAR_OPERACION PROC
   push dx
-  mov dx,10
 
-  xor ax,ax
-  mov al,n2_decenas
-  mul dl
-  add al,n2_unidades
-  push ax
-  
-  xor ax,ax
-  mov al,n1_decenas
-  mul dl
-  add al,n1_unidades
-  pop dx
+  ESTABLECER_OPERANDOS
 
   mov [resultado+1],'+'
   
@@ -227,9 +249,7 @@ MOSTRAR_RESULTADO PROC
   ret
 ENDP
 
-MAIN PROC
-  INICIALIZAR
-  
+CALCULADORA PROC
   CALCULADORA_CICLO:
     call DIBUJAR_INTERFAZ
 
@@ -247,7 +267,7 @@ MAIN PROC
       call CAPTURAR_TECLA
       
       cmp ah,tecla_esc
-      je SALIR
+      je SALIR_CALC
       cmp ah,tecla_bsp
       je CAPTURAR_UNIDADES_N1
       cmp al,'+'
@@ -271,8 +291,84 @@ MAIN PROC
 
     jmp CALCULADORA_CICLO
 
-  SALIR:
+  SALIR_CALC:
     LIMPIAR_PANTALLA
+    ret
+ENDP
+
+SOLICITAR_DIGITO_DIVISION MACRO prompt,decenas,unidades
+  IMPRIMIR_CADENA prompt
+  PEDIR_CHAR
+  sub al,'0'
+  mov decenas,al
+  PEDIR_CHAR
+  sub al,'0'
+  mov unidades,al
+ENDM
+
+DIVISION_DOS_DIGITOS PROC
+  LIMPIAR_PANTALLA
+  
+  SOLICITAR_DIGITO_DIVISION n1_prompt,n1_decenas,n1_unidades
+  SOLICITAR_DIGITO_DIVISION n2_prompt,n2_decenas,n2_unidades
+
+  IMPRIMIR_CADENA division
+
+  xor ax,ax
+  xor bx,bx
+
+  ESTABLECER_OPERANDOS
+
+  xor ah,ah
+  div dl
+  xor ah,ah
+  aam
+
+  add ax,3030h
+  mov dl,al
+  mov al,ah
+  call IMPRIMIR_CARACTER
+  mov al,dl
+  call IMPRIMIR_CARACTER
+
+  PEDIR_CHAR
+  LIMPIAR_PANTALLA
+  ret
+ENDP
+
+MAIN PROC
+  INICIALIZAR
+
+  MENU:
+    LIMPIAR_PANTALLA
+    IMPRIMIR_CADENA menu_l1
+    IMPRIMIR_CADENA menu_l2
+    IMPRIMIR_CADENA menu_l3
+    IMPRIMIR_CADENA menu_l4
+    IMPRIMIR_CADENA menu_l5
+    IMPRIMIR_CADENA menu_l6
+    PEDIR_CHAR
+
+    cmp al,'1'
+    je MOSTRAR_CALCULADORA
+    cmp al,'2'
+    je DIVISION_NUMEROS
+    cmp al,'3'
+    je SALIR_MENU
+
+    IMPRIMIR_CADENA opcion_incorrecta
+    PEDIR_CHAR
+    jmp MENU
+  
+  MOSTRAR_CALCULADORA:
+    call CALCULADORA
+    jmp MENU
+  
+  DIVISION_NUMEROS:
+    call DIVISION_DOS_DIGITOS
+    jmp MENU
+  
+  SALIR_MENU:
     .exit
 ENDP
 
